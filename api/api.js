@@ -2,7 +2,7 @@ require("dotenv").config();
 let express = require("express");
 let cors = require("cors");
 let bodyparser = require("body-parser");
-let routes = require("./services/routers");
+let routes = require("./routers");
 let port = process.env.PORT;
 // let cronjob = require("./api/cronmail");
 // let port = process.env.PORT || 5005;
