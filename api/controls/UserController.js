@@ -14,7 +14,7 @@ module.exports = {
       refreshToken: getRefreshToken({ username: username }),
       accessToken: getAccessToken({ username: username }),
     };
-    return res.status(200).json({ token });
+    return res.status(200).json({...token});
   },
   getUsers: (req, res, next) => {
     try {
