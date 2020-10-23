@@ -1,35 +1,9 @@
 "use strict";
-// const mysql = require("mysql");
-
-// const db = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_WD,
-//   database: process.env.DB_NAME,
-//   port: 3306,
-// });
-// db.connect((err) => {
-//   if (err) {
-//     if (err.code === "PROTOCOL_CONNECTION_LOST") {
-//       console.error("Database connection was closed.");
-//       return;
-//     }
-//     if (err.code === "ER_CON_COUNT_ERROR") {
-//       console.error("Database has too many connections.");
-//       return;
-//     }
-//     if (err.code === "ECONNREFUSED") {
-//       console.error(err.message, "Database connection was refused.");
-//       return;
-//     }
-//   }
-//   console.log("db is connect!");
-// });
 const database = require("./databases");
 const dbService = (environment, migrate) => {
   const authenticateDb = (db) => db.authenticate();
-  const dropDb = (db) => db.drop();
-  const syncDb = (db) => db.sync();
+  //const dropDb = (db) => db.drop();
+  // const syncDb = (db) => db.sync();
   const successfulDBStart = (db) =>
     console.info(
       `connection to the database ${db.options.database} has been established successfully`
@@ -46,7 +20,7 @@ const dbService = (environment, migrate) => {
   };
   const startMigrateTrue = async () => {
     try {
-      await syncDB();
+      // await syncDB();
       successfulDBStart();
     } catch (err) {
       errorDBStart(err);
@@ -55,8 +29,8 @@ const dbService = (environment, migrate) => {
 
   const startMigrateFalse = async (db) => {
     try {
-      await dropDb(db);
-      await syncDb(db);
+      // await dropDb(db);
+      // await syncDb(db);
       successfulDBStart(db);
     } catch (err) {
       errorDBStart(err);
@@ -67,7 +41,7 @@ const dbService = (environment, migrate) => {
     databases.map(async (val) => {
       try {
         await authenticateDb(val);
-        await startMigrateFalse(val);
+        // await startMigrateFalse(val);
       } catch (err) {
         errorDBStart(err);
       }
