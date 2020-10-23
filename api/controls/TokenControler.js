@@ -1,7 +1,7 @@
 "use strict";
 const jwtService = require("../services/auth.services");
 const { getAccessToken, getRefreshToken, verifyToken } = jwtService;
-const { ACCESS_TOKEN_SECRET, TOKEN_SECRET } = process.env;
+const { ACCESS_TOKEN_SECRET, TOKEN_SECRET, ACCESS_TOKEN_LIFE } = process.env;
 module.exports = {
   verify: (req, res, next) => {
     const authHeader = req.headers["authorization"];
@@ -13,7 +13,7 @@ module.exports = {
       });
     try {
       verifyToken(accessToken, ACCESS_TOKEN_SECRET);
-      console.log(verifyToken(accessToken, ACCESS_TOKEN_SECRET))
+      // console.log(verifyToken(accessToken, ACCESS_TOKEN_SECRET))
       next();
     } catch (e) {
       return res.status(401).json({

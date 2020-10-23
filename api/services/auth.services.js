@@ -14,7 +14,7 @@ const authService = {
     }),
   getAccessToken: (payload) =>
     jwt.sign(payload, ACCESS_TOKEN_SECRET, {
-      expiresIn: ACCESS_TOKEN_LIFE,
+      expiresIn: 3600,
       algorithm: "HS256",
     }),
   verifyToken: (tokenVerify, tokenSecret) =>
