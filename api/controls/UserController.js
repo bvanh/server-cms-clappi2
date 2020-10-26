@@ -2,16 +2,17 @@
 const db = require("../services/db.services");
 const sequelize = require("sequelize");
 const Users = require("../models/Users");
-const attributesUser = ["fake_id", "username", "status", "email", "mobile"];
+const attributesUser = ["fake_id", "username", "status", "email", "mobile","gender"];
 const typeSearch = {
   1: "username",
 };
 const getPagingData = (data, page, limit) => {
+  console.log(data)
   const { count: totalItems, rows: listUsers } = data;
   const currentPage = page ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
 
-  return { totalItems, listUsers, totalPages, currentPage };
+  return { totalItems, totalPages, currentPage, listUsers };
 };
 const getPagination = (page, size) => {
   const limit = size ? +size : 3;
@@ -20,7 +21,8 @@ const getPagination = (page, size) => {
 };
 module.exports = {
   getUsers: async (req, res, next) => {
-    const { page, search, type, size } = req.body;
+    //console.log(req)
+    const { page, search, type, size } = req.query;
     const { limit, offset } = getPagination(page, size);
     Users.findAndCountAll({
       attributes: attributesUser,

@@ -23,6 +23,7 @@ module.exports = {
   },
   refreshToken: (req, res, next) => {
     const { refreshToken } = req.body;
+    //console.log(refreshToken);
     let user;
     try {
       user = verifyToken(refreshToken, TOKEN_SECRET);

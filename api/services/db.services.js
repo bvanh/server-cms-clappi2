@@ -41,7 +41,7 @@ const dbService = (environment, migrate) => {
     databases.map(async (val) => {
       try {
         await authenticateDb(val);
-        // await startMigrateFalse(val);
+        await startMigrateFalse(val);
       } catch (err) {
         errorDBStart(err);
       }
