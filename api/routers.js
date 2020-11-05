@@ -14,7 +14,9 @@ module.exports = function (app) {
   //news
   app.route("/news").get(token.verify, apiNews.getNews);
   //media
-  app.route("/media/images").get(media.getImages);
-  app.route("/media/upload").post(multer.single("file"), media.upload);
-  app.route("/media/delete").post(media.delete);
+  app.route("/media/images").get(token.verify, media.getImages);
+  app
+    .route("/media/upload")
+    .post(token.verify, multer.single("file"), media.upload);
+  app.route("/media/delete").post(token.verify, media.delete);
 };
